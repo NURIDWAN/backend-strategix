@@ -1,0 +1,12 @@
+/.dbimageBuild
+/.ddev-docker-compose-base.yaml
+/.ddev-docker-compose-full.yaml
+/.homeadditions
+/.webimageBuild
+/db-build
+/db_snapshots
+/mysql
+/traefik
+/web-build
+/xhprof
+/.gitignore_global

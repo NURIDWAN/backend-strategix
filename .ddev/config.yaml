@@ -1,0 +1,35 @@
+name: grapadi-strategix-backend
+type: laravel
+docroot: public
+php_version: "8.2"
+webserver_type: nginx-fpm
+xdebug_enabled: false
+database:
+    type: mariadb
+    version: "10.11"
+use_dns_when_possible: true
+composer_version: "2"
+nodejs_version: "20"
+corepack_enable: false
+
+web_environment:
+    - APP_ENV=local
+    - APP_DEBUG=true
+    - APP_URL=https://grapadi-strategix-backend.ddev.site
+    - FRONTEND_URL=http://localhost:5173
+    - DB_CONNECTION=mysql
+    - DB_HOST=db
+    - DB_PORT=3306
+    - DB_DATABASE=db
+    - DB_USERNAME=db
+    - DB_PASSWORD=db
+    - SESSION_DRIVER=file
+    - CACHE_STORE=file
+
+hooks:
+    post-start:
+        - exec: "[ -f .env ] || cp .env.example .env"
+        - exec: "[ -d vendor ] || composer install --no-interaction --prefer-dist"
+        - exec: "php artisan key:generate --force 2>/dev/null || true"
+        - exec: "php artisan migrate --force 2>/dev/null || true"
+        - exec: "php artisan storage:link 2>/dev/null || true"
