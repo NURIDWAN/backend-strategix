@@ -79,6 +79,13 @@ class PdfPaymentController extends Controller
      */
     public function purchase(Request $request): JsonResponse
     {
+        if (!config('singapay.payment_enabled', true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Fitur pembayaran sedang tidak tersedia. Silakan coba lagi nanti.',
+            ], 503);
+        }
+
         $user = Auth::user();
 
         if (!$user) {

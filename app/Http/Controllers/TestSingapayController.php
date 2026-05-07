@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\Singapay\SingapayApiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * Test Controller untuk Singapay Integration
@@ -86,6 +87,76 @@ class TestSingapayController extends Controller
                 'log_level' => config('singapay.logging.level'),
             ],
         ]);
+    }
+
+    /**
+     * Create test payment link with NO minimum amount restriction
+     * POST /api/test/singapay/payment
+     */
+    public function createTestPayment(Request $request): JsonResponse
+    {
+        $request->validate([
+            'amount'         => 'required|numeric|min:1',
+            'payment_method' => 'required|in:virtual_account,qris',
+            'bank_code'      => 'nullable|string',
+            'description'    => 'nullable|string|max:255',
+        ]);
+
+        try {
+            $amount      = (float) $request->amount;
+            $method      = $request->payment_method;
+            $bankCode    = $request->bank_code;
+            $description = $request->description ?? 'Test Payment';
+            $reffNo      = 'TEST-' . strtoupper(Str::random(8)) . '-' . time();
+
+            $whitelist = match ($method) {
+                'virtual_account' => $bankCode
+                    ? [strtoupper($bankCode)]
+                    : array_map('strtoupper', config('singapay.virtual_account.banks', ['BRI'])),
+                'qris' => ['QRIS'],
+                default => []
+            };
+
+            $frontendUrl = rtrim(config('app.frontend_url', env('FRONTEND_URL', 'http://localhost:5173')), '/');
+            $returnUrl   = $frontendUrl . '/payment/success?transaction_code=' . $reffNo;
+
+            $payload = [
+                'reff_no'         => $reffNo,
+                'title'           => $description,
+                'total_amount'    => $amount,
+                'payment_channel' => $whitelist,
+                'expired_at'      => now()->addMinutes(60)->timestamp * 1000,
+                'return_url'      => $returnUrl,
+                'max_usage'       => 1,
+            ];
+
+            $response = $this->singapayService->createPaymentLink($payload);
+
+            if (!$response['success']) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $response['message'] ?? 'Failed to create payment link',
+                ], 422);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Test payment link created',
+                'data'    => [
+                    'reff_no'      => $reffNo,
+                    'amount'       => $amount,
+                    'method'       => $method,
+                    'payment_url'  => $response['data']['payment_url'] ?? null,
+                    'mode'         => $this->singapayService->getMode(),
+                    'raw_response' => $response['data'],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Exception: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

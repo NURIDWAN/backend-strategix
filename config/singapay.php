@@ -170,4 +170,13 @@ return [
         'enable_qris' => env('SINGAPAY_ENABLE_QRIS', true),
         'enable_virtual_account' => env('SINGAPAY_ENABLE_VIRTUAL_ACCOUNT', true),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Master Payment Switch
+    |--------------------------------------------------------------------------
+    | Set SINGAPAY_PAYMENT_ENABLED=false to disable the purchase endpoint.
+    | Info, status, history, and cancel remain accessible.
+    */
+    'payment_enabled' => env('SINGAPAY_PAYMENT_ENABLED', true),
 ];

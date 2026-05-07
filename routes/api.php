@@ -507,4 +507,15 @@ Route::prefix('test/singapay')->group(function () {
     Route::get('/token', [\App\Http\Controllers\TestSingapayController::class, 'testAccessToken']);
     Route::get('/config', [\App\Http\Controllers\TestSingapayController::class, 'testConfig']);
     Route::post('/clear-cache', [\App\Http\Controllers\TestSingapayController::class, 'clearCache']);
+    Route::post('/payment', [\App\Http\Controllers\TestSingapayController::class, 'createTestPayment']);
+});
+
+// =====================================
+// Test Faspay Routes (DEBUG MODE ONLY)
+// Only accessible when APP_DEBUG=true
+// =====================================
+Route::prefix('test/faspay')->group(function () {
+    Route::get('/config', [\App\Http\Controllers\TestFaspayController::class, 'testConfig']);
+    Route::post('/payment', [\App\Http\Controllers\TestFaspayController::class, 'createTestPayment']);
+    Route::get('/status/{billNo}', [\App\Http\Controllers\TestFaspayController::class, 'checkStatus']);
 });
