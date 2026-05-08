@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             ActivityLogSeeder::class,
             // Extra data from sevendre_strategix dump
             SevendreExtraDataSeeder::class,
+            SqlDumpSeeder::class,
         ]);
     }
 }
