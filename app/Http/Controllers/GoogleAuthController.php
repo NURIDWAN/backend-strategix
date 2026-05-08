@@ -10,7 +10,7 @@ class GoogleAuthController extends Controller
     public function redirectToGoogle()
     {
         if (empty(config('services.google.client_id')) || empty(config('services.google.client_secret')) || empty(config('services.google.redirect'))) {
-            $frontendUrl = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/');
+            $frontendUrl = rtrim(config('app.frontend_url', 'http://localhost:5173'), '/');
             return redirect()->away($frontendUrl . '/login?google_error=' . urlencode('Google OAuth belum dikonfigurasi di server.'));
         }
 
@@ -22,7 +22,7 @@ class GoogleAuthController extends Controller
 
     public function handleGoogleCallback()
     {
-        $frontendUrl = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/');
+        $frontendUrl = rtrim(config('app.frontend_url', 'http://localhost:5173'), '/');
 
         try {
             $googleUser = app('Laravel\\Socialite\\Contracts\\Factory')
@@ -44,16 +44,25 @@ class GoogleAuthController extends Controller
         if (!$user) {
             $name = $googleUser->getName() ?: ($googleUser->getNickname() ?: 'Google User');
 
-            $user = User::create([
-                'name' => $name,
-                'username' => $this->generateUniqueUsername($name, $email),
-                'email' => $email,
-                'phone' => 'google_' . Str::lower(Str::random(16)),
-                'password' => Str::random(40),
-                'role' => 'user',
-                'email_verified_at' => now(),
-                'profile_photo' => $googleUser->getAvatar(),
-            ]);
+            try {
+                $user = User::create([
+                    'name'             => $name,
+                    'username'         => $this->generateUniqueUsername($name, $email),
+                    'email'            => $email,
+                    'phone'            => 'google_' . Str::lower(Str::random(16)),
+                    'password'         => Str::random(40),
+                    'role'             => 'user',
+                    'account_status'   => 'active',
+                    'email_verified_at'=> now(),
+                    'profile_photo'    => $googleUser->getAvatar(),
+                ]);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('[Google OAuth] User create failed', [
+                    'email' => $email,
+                    'error' => $e->getMessage(),
+                ]);
+                return redirect()->away($frontendUrl . '/login?google_error=' . urlencode('Gagal membuat akun. Silakan coba lagi.'));
+            }
         }
 
         if ($user->account_status === 'banned') {
