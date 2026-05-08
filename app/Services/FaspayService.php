@@ -56,6 +56,85 @@ class FaspayService
     }
 
     /**
+     * Generate Faspay notification signature.
+     * Formula: sha1(md5(user_id + password + bill_no + payment_status_code))
+     */
+    public function generateNotificationSignature(string $billNo, string $paymentStatusCode): string
+    {
+        return sha1(md5($this->userId . $this->password . $billNo . $paymentStatusCode));
+    }
+
+    /**
+     * Validate signature received from Faspay notification payload.
+     */
+    public function validateNotificationSignature(array $data): bool
+    {
+        $billNo            = (string) ($data['bill_no'] ?? '');
+        $paymentStatusCode = (string) ($data['payment_status_code'] ?? '');
+        $receivedSignature = (string) ($data['signature'] ?? '');
+
+        if ($billNo === '' || $paymentStatusCode === '' || $receivedSignature === '') {
+            return false;
+        }
+
+        $expected = $this->generateNotificationSignature($billNo, $paymentStatusCode);
+        $isValid  = hash_equals($expected, $receivedSignature);
+
+        if (!$isValid && $this->loggingEnabled) {
+            Log::warning('[Faspay] Notification signature mismatch', [
+                'expected' => $expected,
+                'received' => $receivedSignature,
+                'bill_no'  => $billNo,
+                'status'   => $paymentStatusCode,
+            ]);
+        }
+
+        return $isValid;
+    }
+
+    /**
+     * Parse Faspay notification payload into structured data.
+     */
+    public function handleNotification(array $data): array
+    {
+        if (!$this->validateNotificationSignature($data)) {
+            return [
+                'success'       => false,
+                'error'         => 'Invalid signature',
+                'response_code' => '99',
+                'response_desc' => 'Signature validation failed',
+            ];
+        }
+
+        $statusMap = [
+            '0' => 'unpaid',
+            '1' => 'processing',
+            '2' => 'paid',
+            '3' => 'failed',
+            '4' => 'reversed',
+            '5' => 'bill_not_found',
+            '7' => 'expired',
+            '8' => 'cancelled',
+            '9' => 'unknown',
+        ];
+
+        $code = (string) ($data['payment_status_code'] ?? '9');
+
+        return [
+            'success'             => true,
+            'trx_id'              => $data['trx_id'] ?? null,
+            'bill_no'             => $data['bill_no'] ?? null,
+            'payment_status'      => $statusMap[$code] ?? 'unknown',
+            'payment_status_code' => $code,
+            'payment_date'        => $data['payment_date'] ?? null,
+            'payment_channel'     => $data['payment_channel'] ?? null,
+            'payment_total'       => $data['payment_total'] ?? null,
+            'response_code'       => '00',
+            'response_desc'       => 'Success',
+        ];
+    }
+
+    /**
      * Create a Faspay invoice and return the payment redirect URL.
      *
      * Required keys in $data:
@@ -95,7 +174,7 @@ class FaspayService
                 'bill_total'       => $normalizedBillTotal,
                 'cust_no'          => $billNo,
                 'cust_name'        => (string) ($data['cust_name'] ?? 'Customer'),
-                'return_url'       => (string) ($data['return_url'] ?? $frontendUrl . '/payment/success'),
+                'return_url'       => base64_encode((string) ($data['return_url'] ?? $frontendUrl . '/payment/success')),
                 'msisdn'           => $phone,
                 'email'            => $email,
                 'item'             => $data['item'] ?? [[

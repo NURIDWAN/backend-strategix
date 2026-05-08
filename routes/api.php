@@ -476,6 +476,20 @@ Route::prefix('articles')->middleware('feature:feature_articles')->group(functio
 
 
 // =====================================
+// Centralized Payment Callback Hub forwards (HMAC-verified)
+// =====================================
+Route::post('/hub-webhook/singapay', [\App\Http\Controllers\HubWebhookController::class, 'singapay'])
+    ->middleware('throttle:60,1');
+Route::post('/hub-webhook/faspay', [\App\Http\Controllers\HubWebhookController::class, 'faspay'])
+    ->middleware('throttle:60,1');
+
+// =====================================
+// Faspay direct webhook (used by hub forward via FaspayController, kept for fallback)
+// =====================================
+Route::post('/webhook/faspay/notification', [\App\Http\Controllers\FaspayController::class, 'notification'])
+    ->middleware('throttle:60,1');
+
+// =====================================
 // SingaPay Webhook Routes (PUBLIC - NO AUTH)
 // Rate Limited: 60 requests per minute per IP
 // =====================================
