@@ -164,6 +164,8 @@ class FaspayService
 
             $frontendUrl = rtrim(config('app.frontend_url', env('FRONTEND_URL', 'http://localhost:5173')), '/');
 
+            $defaultReturnUrl = (string) (config('faspay.webhook_urls.return') ?: $frontendUrl . '/payment/success');
+
             $invoiceData = [
                 'merchant_id'      => $this->merchantId,
                 'merchant_user_id' => $this->userId,
@@ -174,7 +176,7 @@ class FaspayService
                 'bill_total'       => $normalizedBillTotal,
                 'cust_no'          => $billNo,
                 'cust_name'        => (string) ($data['cust_name'] ?? 'Customer'),
-                'return_url'       => base64_encode((string) ($data['return_url'] ?? $frontendUrl . '/payment/success')),
+                'return_url'       => (string) ($data['return_url'] ?? $defaultReturnUrl),
                 'msisdn'           => $phone,
                 'email'            => $email,
                 'item'             => $data['item'] ?? [[
