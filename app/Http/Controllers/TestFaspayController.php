@@ -66,7 +66,7 @@ class TestFaspayController extends Controller
         }
 
         try {
-            $prefix      = strtoupper((string) ($request->prefix ?: 'TEST'));
+            $prefix      = strtoupper((string) ($request->prefix ?: config('faspay.invoice_prefix', 'GRPD')));
             $billNo      = $prefix . '-' . strtoupper(Str::random(6)) . '-' . time();
             $amount      = (float) $request->amount;
             $description = $request->description ?? 'Test Payment Grapadi';
