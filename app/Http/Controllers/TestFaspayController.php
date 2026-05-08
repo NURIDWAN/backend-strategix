@@ -78,7 +78,7 @@ class TestFaspayController extends Controller
                 'cust_name'        => $request->customer_name,
                 'cust_email'       => $request->customer_email,
                 'cust_phone'       => $request->customer_phone,
-                'return_url'       => $frontendUrl . '/payment/success?transaction_code=' . $billNo,
+                'return_url'       => $frontendUrl . '/payment/success',
                 'bill_expired_date'=> now()->addMinutes(config('faspay.invoice_expiration', 30))->toDateTimeString(),
             ];
 

@@ -95,7 +95,7 @@ class FaspayService
                 'bill_total'       => $normalizedBillTotal,
                 'cust_no'          => $billNo,
                 'cust_name'        => (string) ($data['cust_name'] ?? 'Customer'),
-                'return_url'       => base64_encode((string) ($data['return_url'] ?? $frontendUrl . '/payment/success')),
+                'return_url'       => (string) ($data['return_url'] ?? $frontendUrl . '/payment/success'),
                 'msisdn'           => $phone,
                 'email'            => $email,
                 'item'             => $data['item'] ?? [[
