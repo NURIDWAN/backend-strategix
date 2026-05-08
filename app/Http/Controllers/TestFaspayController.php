@@ -51,6 +51,7 @@ class TestFaspayController extends Controller
     {
         $request->validate([
             'amount'         => 'required|numeric|min:1',
+            'prefix'         => 'nullable|string|alpha_num|max:8',
             'customer_name'  => 'required|string|max:255',
             'customer_email' => 'required|email',
             'customer_phone' => 'required|string|max:20',
@@ -65,7 +66,8 @@ class TestFaspayController extends Controller
         }
 
         try {
-            $billNo      = 'TEST-' . strtoupper(Str::random(8)) . '-' . time();
+            $prefix      = strtoupper((string) ($request->prefix ?: 'TEST'));
+            $billNo      = $prefix . '-' . strtoupper(Str::random(6)) . '-' . time();
             $amount      = (float) $request->amount;
             $description = $request->description ?? 'Test Payment Grapadi';
 
