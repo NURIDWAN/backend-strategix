@@ -712,7 +712,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:13'
+        example: '2026-05-10T02:42:57'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -773,7 +773,7 @@ endpoints:
       purpose: architecto
       location: 'n'
       business_type: g
-      start_date: '2026-05-10T02:36:13'
+      start_date: '2026-05-10T02:42:57'
       values: architecto
       vision: architecto
       mission: architecto
@@ -948,7 +948,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:13'
+        example: '2026-05-10T02:42:57'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1019,7 +1019,7 @@ endpoints:
       purpose: architecto
       location: 'n'
       business_type: g
-      start_date: '2026-05-10T02:36:13'
+      start_date: '2026-05-10T02:42:57'
       values: architecto
       vision: architecto
       mission: architecto
@@ -1269,7 +1269,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:13'
+        example: '2026-05-10T02:42:57'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1340,7 +1340,7 @@ endpoints:
       purpose: architecto
       location: 'n'
       business_type: g
-      start_date: '2026-05-10T02:36:13'
+      start_date: '2026-05-10T02:42:57'
       values: architecto
       vision: architecto
       mission: architecto
@@ -2102,7 +2102,7 @@ endpoints:
         name: 'competitors[].type'
         description: ''
         required: true
-        example: ownshop
+        example: competitor
         type: string
         enumValues:
           - ownshop
@@ -2208,7 +2208,7 @@ endpoints:
       competitors:
         -
           competitor_name: 'n'
-          type: ownshop
+          type: competitor
           code: g
           address: architecto
           annual_sales_estimate: 39
@@ -2469,7 +2469,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: product
+        example: service
         type: string
         enumValues:
           - product
@@ -2559,7 +2559,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: in_development
+        example: draft
         type: string
         enumValues:
           - draft
@@ -2571,13 +2571,13 @@ endpoints:
     cleanBodyParameters:
       user_id: architecto
       business_background_id: architecto
-      type: product
+      type: service
       name: 'n'
       description: 'Eius et animi quos velit et.'
       price: 60
       advantages: architecto
       development_strategy: architecto
-      status: in_development
+      status: draft
     fileParameters:
       image_path: null
     responses: []
@@ -2914,7 +2914,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: draft
+        example: active
         type: string
         enumValues:
           - draft
@@ -2928,7 +2928,7 @@ endpoints:
       pricing_strategy: architecto
       monthly_target: 39
       collaboration_plan: architecto
-      status: draft
+      status: active
     fileParameters: []
     responses: []
     responseFields: []
@@ -3363,7 +3363,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: completed
+        example: draft
         type: string
         enumValues:
           - draft
@@ -3383,7 +3383,7 @@ endpoints:
       workflow_image_path: 'n'
       equipment_needs: architecto
       technology_stack: architecto
-      status: completed
+      status: draft
     fileParameters: []
     responses: []
     responseFields: []
@@ -4515,7 +4515,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: draft
+        example: active
         type: string
         enumValues:
           - draft
@@ -4531,7 +4531,7 @@ endpoints:
       jobdesk: architecto
       experience: architecto
       sort_order: 39
-      status: draft
+      status: active
     fileParameters:
       photo: null
     responses: []
@@ -4998,7 +4998,7 @@ endpoints:
         name: category_subtype
         description: ''
         required: false
-        example: cogs
+        example: tax_expense
         type: string
         enumValues:
           - operating_revenue
@@ -5051,7 +5051,7 @@ endpoints:
       business_background_id: architecto
       name: 'n'
       type: income
-      category_subtype: cogs
+      category_subtype: tax_expense
       color: gzmiyvd
       status: plan
       description: 'Eius et animi quos velit et.'
@@ -5113,7 +5113,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: income
+        example: expense
         type: string
         enumValues:
           - income
@@ -5126,7 +5126,7 @@ endpoints:
         name: category_subtype
         description: ''
         required: false
-        example: other
+        example: interest_expense
         type: string
         enumValues:
           - operating_revenue
@@ -5176,8 +5176,8 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       name: b
-      type: income
-      category_subtype: other
+      type: expense
+      category_subtype: interest_expense
       color: ngzmiyv
       status: plan
       description: 'Eius et animi quos velit et.'
@@ -5981,7 +5981,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: expense
+        example: income
         type: string
         enumValues:
           - income
@@ -6005,7 +6005,7 @@ endpoints:
         name: simulation_date
         description: 'Must be a valid date.'
         required: true
-        example: '2026-05-10T02:36:14'
+        example: '2026-05-10T02:42:58'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -6038,7 +6038,7 @@ endpoints:
         name: payment_method
         description: ''
         required: true
-        example: cash
+        example: digital_wallet
         type: string
         enumValues:
           - cash
@@ -6068,7 +6068,7 @@ endpoints:
         name: is_recurring
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -6115,14 +6115,14 @@ endpoints:
       user_id: architecto
       business_background_id: architecto
       financial_category_id: architecto
-      type: expense
+      type: income
       amount: 39
-      simulation_date: '2026-05-10T02:36:14'
+      simulation_date: '2026-05-10T02:42:58'
       year: 7
       description: 'Quos velit et fugiat sunt nihil accusantium harum.'
-      payment_method: cash
+      payment_method: digital_wallet
       status: cancelled
-      is_recurring: true
+      is_recurring: false
       recurring_frequency: daily
       recurring_end_date: '2052-06-02'
       notes: architecto
@@ -6184,7 +6184,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: expense
+        example: income
         type: string
         enumValues:
           - income
@@ -6208,7 +6208,7 @@ endpoints:
         name: simulation_date
         description: 'Must be a valid date.'
         required: true
-        example: '2026-05-10T02:36:14'
+        example: '2026-05-10T02:42:58'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -6241,7 +6241,7 @@ endpoints:
         name: payment_method
         description: ''
         required: true
-        example: cash
+        example: digital_wallet
         type: string
         enumValues:
           - cash
@@ -6257,7 +6257,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: cancelled
+        example: completed
         type: string
         enumValues:
           - planned
@@ -6282,7 +6282,7 @@ endpoints:
         name: recurring_frequency
         description: ''
         required: false
-        example: weekly
+        example: daily
         type: string
         enumValues:
           - daily
@@ -6316,15 +6316,15 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       financial_category_id: architecto
-      type: expense
+      type: income
       amount: 39
-      simulation_date: '2026-05-10T02:36:14'
+      simulation_date: '2026-05-10T02:42:58'
       year: 7
       description: 'Quos velit et fugiat sunt nihil accusantium harum.'
-      payment_method: cash
-      status: cancelled
+      payment_method: digital_wallet
+      status: completed
       is_recurring: false
-      recurring_frequency: weekly
+      recurring_frequency: daily
       recurring_end_date: '2052-06-02'
       notes: architecto
     fileParameters: []
@@ -7942,7 +7942,7 @@ endpoints:
         name: bank_code
         description: 'This field is required when <code>payment_method</code> is <code>virtual_account</code>.'
         required: false
-        example: CIMB
+        example: BRI
         type: string
         enumValues:
           - BRI
@@ -7958,7 +7958,7 @@ endpoints:
     cleanBodyParameters:
       package_id: 16
       payment_method: qris
-      bank_code: CIMB
+      bank_code: BRI
     fileParameters: []
     responses: []
     responseFields: []
@@ -8455,7 +8455,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: completed
+        example: pending
         type: string
         enumValues:
           - pending
@@ -8483,7 +8483,7 @@ endpoints:
         name: date_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:15'
+        example: '2026-05-10T02:42:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8494,7 +8494,7 @@ endpoints:
         name: date_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:15'
+        example: '2026-05-10T02:42:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8525,10 +8525,10 @@ endpoints:
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      status: completed
+      status: pending
       search: b
-      date_from: '2026-05-10T02:36:15'
-      date_to: '2026-05-10T02:36:15'
+      date_from: '2026-05-10T02:42:59'
+      date_to: '2026-05-10T02:42:59'
       sort: oldest
       per_page: 22
     fileParameters: []
@@ -8609,7 +8609,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: completed
+        example: cancelled
         type: string
         enumValues:
           - confirmed
@@ -8643,7 +8643,7 @@ endpoints:
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      status: completed
+      status: cancelled
       notes_consultant: architecto
       meeting_link: 'http://bailey.com/'
     fileParameters: []
@@ -9605,7 +9605,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: published
+        example: draft
         type: string
         enumValues:
           - draft
@@ -9619,7 +9619,7 @@ endpoints:
         name: published_at
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:15'
+        example: '2026-05-10T02:42:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -9631,8 +9631,8 @@ endpoints:
       body: architecto
       meta_title: 'n'
       meta_description: g
-      status: published
-      published_at: '2026-05-10T02:36:15'
+      status: draft
+      published_at: '2026-05-10T02:42:59'
     fileParameters:
       featured_image: null
     responses: []
@@ -9806,7 +9806,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: draft
+        example: published
         type: string
         enumValues:
           - draft
@@ -9820,7 +9820,7 @@ endpoints:
         name: published_at
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:16'
+        example: '2026-05-10T02:42:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -9843,8 +9843,8 @@ endpoints:
       body: architecto
       meta_title: 'n'
       meta_description: g
-      status: draft
-      published_at: '2026-05-10T02:36:16'
+      status: published
+      published_at: '2026-05-10T02:42:59'
       slug: z
     fileParameters:
       featured_image: null
@@ -9988,7 +9988,7 @@ endpoints:
         name: published_at
         description: 'Must be a valid date.'
         required: false
-        example: '2026-05-10T02:36:16'
+        example: '2026-05-10T02:42:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -10012,7 +10012,7 @@ endpoints:
       meta_title: 'n'
       meta_description: g
       status: published
-      published_at: '2026-05-10T02:36:16'
+      published_at: '2026-05-10T02:42:59'
       slug: z
     fileParameters:
       featured_image: null
@@ -10416,7 +10416,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: failed
+        example: pending
         type: string
         enumValues:
           - pending
@@ -10438,7 +10438,7 @@ endpoints:
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      status: failed
+      status: pending
       notes: b
     fileParameters: []
     responses: []
@@ -10521,7 +10521,7 @@ endpoints:
         name: package_type
         description: ''
         required: true
-        example: yearly
+        example: monthly
         type: string
         enumValues:
           - monthly
@@ -10610,7 +10610,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       name: b
-      package_type: yearly
+      package_type: monthly
       description: 'Eius et animi quos velit et.'
       price: 60
       duration_days: 42
@@ -10747,7 +10747,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -10771,7 +10771,7 @@ endpoints:
       price: 60
       duration_days: 42
       consultation_credits: 37
-      is_active: false
+      is_active: true
       sort_order: 9
     fileParameters: []
     responses: []
@@ -10933,7 +10933,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: paid
+        example: pending
         type: string
         enumValues:
           - pending
@@ -10954,7 +10954,7 @@ endpoints:
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      status: paid
+      status: pending
       notes: b
     fileParameters: []
     responses: []
@@ -11920,6 +11920,359 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       transaction_code: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/test/singapay/token
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Test access token generation
+        GET /api/test/singapay/token
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/test/singapay/config
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Test Singapay configuration
+        GET /api/test/singapay/config
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/test/singapay/clear-cache
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Clear token cache
+        POST /api/test/singapay/clear-cache
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/test/singapay/payment
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Create test payment link with NO minimum amount restriction
+        POST /api/test/singapay/payment
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      amount:
+        custom: []
+        name: amount
+        description: 'Must be at least 1.'
+        required: true
+        example: 16
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      payment_method:
+        custom: []
+        name: payment_method
+        description: ''
+        required: true
+        example: virtual_account
+        type: string
+        enumValues:
+          - virtual_account
+          - qris
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      bank_code:
+        custom: []
+        name: bank_code
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'Et animi quos velit et fugiat.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      amount: 16
+      payment_method: virtual_account
+      bank_code: architecto
+      description: 'Et animi quos velit et fugiat.'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/test/faspay/config
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Check Faspay configuration
+        GET /api/test/faspay/config
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/test/faspay/payment
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Create a test Faspay invoice — NO minimum amount restriction
+        POST /api/test/faspay/payment
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      amount:
+        custom: []
+        name: amount
+        description: 'Must be at least 1.'
+        required: true
+        example: 16
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      customer_name:
+        custom: []
+        name: customer_name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      customer_email:
+        custom: []
+        name: customer_email
+        description: 'Must be a valid email address.'
+        required: true
+        example: ashly64@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      customer_phone:
+        custom: []
+        name: customer_phone
+        description: 'Must not be greater than 20 characters.'
+        required: true
+        example: vdljnikhwaykcmyu
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'Quidem nostrum qui commodi incidunt iure odit.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      amount: 16
+      customer_name: 'n'
+      customer_email: ashly64@example.com
+      customer_phone: vdljnikhwaykcmyu
+      description: 'Quidem nostrum qui commodi incidunt iure odit.'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/test/faspay/status/{billNo}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Check payment status by bill_no
+        GET /api/test/faspay/status/{billNo}
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      billNo:
+        custom: []
+        name: billNo
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      billNo: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
