@@ -34,6 +34,8 @@ class TestFaspayController extends Controller
             'success' => true,
             'data' => [
                 'environment'       => config('faspay.environment'),
+                'invoice_prefix'    => config('faspay.invoice_prefix', 'GRPD'),
+                'invoice_expiration'=> config('faspay.invoice_expiration', 30),
                 'merchant_id_set'   => !empty(config('faspay.merchant_id')),
                 'user_id_set'       => !empty(config('faspay.user_id')),
                 'password_set'      => !empty(config('faspay.password')),
