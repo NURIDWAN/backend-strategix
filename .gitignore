@@ -24,3 +24,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Scribe API docs - keep config & source, ignore generated views/assets
+/public/vendor/scribe/
+/resources/views/scribe/
+/storage/app/private/scribe/
